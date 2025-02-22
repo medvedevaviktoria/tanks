@@ -5,6 +5,7 @@ import android.widget.FrameLayout
 import android.widget.QuickContactBadge
 import com.example.pr12_battletanks_ustinova_d_v_.CELL_SIZE
 import com.example.pr12_battletanks_ustinova_d_v_.Utils.checkViewCanMoveThroughBorder
+import com.example.pr12_battletanks_ustinova_d_v_.Utils.getElementByCoordinates
 import com.example.pr12_battletanks_ustinova_d_v_.binding
 import com.example.pr12_battletanks_ustinova_d_v_.enums.Direction
 import com.example.pr12_battletanks_ustinova_d_v_.models.Coordinate
@@ -74,9 +75,6 @@ class TankDrawer(val container: FrameLayout) {
         return coordinateList
     }
 
-    private fun getElementByCoordinates(
-        coordinate: Coordinate, elementsOnContainer: List<Element>
-    ) =
-        elementsOnContainer.firstOrNull { it.coordinate == coordinate}
+
 
 }

@@ -7,6 +7,7 @@ import androidx.core.view.marginLeft
 import androidx.core.view.marginTop
 import com.example.pr12_battletanks_ustinova_d_v_.CELL_SIZE
 import com.example.pr12_battletanks_ustinova_d_v_.R
+import com.example.pr12_battletanks_ustinova_d_v_.Utils.getElementByCoordinates
 import com.example.pr12_battletanks_ustinova_d_v_.binding
 import com.example.pr12_battletanks_ustinova_d_v_.enums.Direction
 import com.example.pr12_battletanks_ustinova_d_v_.enums.Material
@@ -30,7 +31,7 @@ class ElementsDrawer(val container: FrameLayout) {
     }
 
     private fun drawOrReplaceView(coordinate: Coordinate) {
-        val viewOnCoordinate = getElementByCoordinates(coordinate)
+        val viewOnCoordinate = getElementByCoordinates(coordinate, elementsOnContainer)
         if (viewOnCoordinate == null) {
             drawView(coordinate)
             return
@@ -46,7 +47,7 @@ class ElementsDrawer(val container: FrameLayout) {
     }
 
     private fun eraseView(coordinate: Coordinate) {
-        val elementOnCoordinate = getElementByCoordinates(coordinate)
+        val elementOnCoordinate = getElementByCoordinates(coordinate, elementsOnContainer)
         if (elementOnCoordinate != null) {
             val erasingView = container.findViewById<View>(elementOnCoordinate.viewId)
             container.removeView(erasingView)
@@ -78,8 +79,6 @@ class ElementsDrawer(val container: FrameLayout) {
         elementsOnContainer.add(Element(viewId,currentMaterial,coordinate))
     }
 
-    private fun getElementByCoordinates(coordinate: Coordinate) =
-        elementsOnContainer.firstOrNull { it.coordinate == coordinate}
 
 
 }
