@@ -1,6 +1,5 @@
 package com.example.pr12_battletanks_ustinova_d_v_.drawers
 
-import android.icu.number.NumberFormatter.UnitWidth
 import android.view.View
 import android.widget.FrameLayout
 import android.widget.ImageView
@@ -11,6 +10,12 @@ import com.example.pr12_battletanks_ustinova_d_v_.Utils.getElementByCoordinates
 import com.example.pr12_battletanks_ustinova_d_v_.enums.Material
 import com.example.pr12_battletanks_ustinova_d_v_.models.Coordinate
 import com.example.pr12_battletanks_ustinova_d_v_.models.Element
+
+
+const val CELL_SIMPLE_ELEMENT = 1
+const val CELL_EAGLE_WIDTH = 4
+const val CELL_EAGLE_HEIGHT = 3
+
 
 class ElementsDrawer(val container: FrameLayout) {
     var currentMaterial = Material.EMPTY
@@ -39,6 +44,16 @@ class ElementsDrawer(val container: FrameLayout) {
         }
     }
 
+    fun drawElementsList(elements: Unit) {
+        if (elements == null) {
+            return
+        }
+        for (element in elements) {
+            currentMaterial = element.material
+            selectMaterial((element.coordinate))
+        }
+    }
+
     private fun replaceView(coordinate: Coordinate) {
         eraseView(coordinate)
         selectMaterial(coordinate)
@@ -62,7 +77,7 @@ class ElementsDrawer(val container: FrameLayout) {
             Material.GRASS -> drawView(R.drawable.grass, coordinate)
             Material.EAGLE -> {
                 removeExistingEagle()
-                drawView(R.drawable.eagle, coordinate, 4, 3)
+                drawView(R.drawable.eagle, coordinate, CELL_EAGLE_WIDTH, CELL_EAGLE_HEIGHT)
             }
             Material.EMPTY -> {}
         }
@@ -77,8 +92,8 @@ class ElementsDrawer(val container: FrameLayout) {
     private fun drawView(
         @DrawableRes image: Int,
         coordinate: Coordinate,
-        width: Int = 1,
-        height: Int = 1
+        width: Int = CELL_EAGLE_WIDTH,
+        height: Int = CELL_EAGLE_HEIGHT
     ) {
         val view = ImageView(container.context)
         val layoutParams = FrameLayout.LayoutParams(width * CELL_SIZE, height * CELL_SIZE)
