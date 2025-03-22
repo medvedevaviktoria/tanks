@@ -44,7 +44,7 @@ class ElementsDrawer(val container: FrameLayout) {
         }
     }
 
-    fun drawElementsList(elements: Unit) {
+    fun drawElementsList(elements: List<Element>?) {
         if (elements == null) {
             return
         }

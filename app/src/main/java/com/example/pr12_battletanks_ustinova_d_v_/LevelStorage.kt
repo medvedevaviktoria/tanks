@@ -19,7 +19,7 @@ class LevelStorage(val context: Context) {
             .apply()
     }
 
-    fun loadLevel() {
+    fun loadLevel():List<Element>? {
         val levelFromPrefs = prefs.getString(KEY_LEVEL, null)
         levelFromPrefs?.let {
             val type = object : TypeToken<List<Element>>() {}.type
