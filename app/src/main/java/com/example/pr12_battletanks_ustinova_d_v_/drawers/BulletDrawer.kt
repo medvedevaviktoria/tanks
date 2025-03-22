@@ -86,26 +86,33 @@ class BulletDrawer(val container: FrameLayout) {
         elementsOnContainer: MutableList<Element>,
         detectedCoordinateList: List<Coordinate>
     ) {
-        if (checkContainerContainsElements(
-                elementsOnContainer.map { it.coordinate},
-                detectedCoordinateList
-            )
-        ) {
-            detectedCoordinateList.forEach {
-                val element = getElementByCoordinates(it, elementsOnContainer)
-                removeElementsAndStopBullet(element,elementsOnContainer)
-            }
+        detectedCoordinateList.forEach {
+            val element = getElementByCoordinates(it, elementsOnContainer)
+            removeElementsAndStopBullet(element, elementsOnContainer)
         }
-
     }
 
     private fun removeElementsAndStopBullet(
         element: Element?,
         elementsOnContainer: MutableList<Element>
     ) {
+        if (element != null) {
+            if (element.material.bulletCanGoThrough) {
+                return
+            }
+            if (element.material.simpleBulletCanDestroy) {
+                stopBullet()
+                removeView(element)
+                elementsOnContainer.remove(element)
+            }
+            else {
+                stopBullet()
+            }
+        }
+    }
+
+    private fun stopBullet() {
         canBulletGoFurther = false
-        removeView(element)
-        elementsOnContainer.remove(element)
     }
 
     private fun removeView(element: Element?) {
@@ -117,17 +124,7 @@ class BulletDrawer(val container: FrameLayout) {
         }
     }
 
-    private fun checkContainerContainsElements(
-        elementsOnContainer: List<Coordinate>,
-        detectedCoordinateList: List<Coordinate>
-    ): Boolean {
-        detectedCoordinateList.forEach {
-            if (elementsOnContainer.contains(it)) {
-                return true
-            }
-        }
-        return false
-    }
+
 
 
     private fun getCoordinatesForTopOrBottomDirection(bulletCoordinate: Coordinate): List<Coordinate> {
