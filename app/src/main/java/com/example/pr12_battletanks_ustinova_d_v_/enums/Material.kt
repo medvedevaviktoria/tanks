@@ -16,7 +16,8 @@ enum class Material(
     val elementsAmountOnScreen: Int,
     val width: Int,
     val height: Int,
-    val image: Int
+    val image: Int,
+    val visibleInEditableMode: Boolean
 ) {
     EMPTY(
         true,
@@ -25,7 +26,8 @@ enum class Material(
         0,
         0,
         0,
-        0
+        0,
+        false
         ),
     BRICK(
         false,
@@ -34,7 +36,8 @@ enum class Material(
         0,
         CELL_SIMPLE_ELEMENT,
         CELL_SIMPLE_ELEMENT,
-        R.drawable.brick
+        R.drawable.brick,
+        false
         ),
     CONCRETE(
         false,
@@ -43,7 +46,8 @@ enum class Material(
         0,
         CELL_SIMPLE_ELEMENT,
         CELL_SIMPLE_ELEMENT,
-        R.drawable.concrete
+        R.drawable.concrete,
+        false
         ),
     GRASS(
         true,
@@ -52,7 +56,8 @@ enum class Material(
         0,
         CELL_SIMPLE_ELEMENT,
         CELL_SIMPLE_ELEMENT,
-        R.drawable.grass
+        R.drawable.grass,
+        false
         ),
     EAGLE(
         false,
@@ -61,24 +66,27 @@ enum class Material(
         1,
         CELL_EAGLE_WIDTH,
         CELL_EAGLE_HEIGHT,
-        R.drawable.eagle
+        R.drawable.eagle,
+        false
         ),
     ENEMY_TANK_RESPAWN(
-        false,
-        false,
         true,
+        true,
+        false,
         3,
         CELL_TANKS_SIZE,
         CELL_TANKS_SIZE,
-        R.drawable.enemy_tank
+        R.drawable.enemy_tank,
+        true
     ),
     PLAYER_TANK_RESPAWN(
-        false,
-        false,
         true,
+        true,
+        false,
         1,
         CELL_TANKS_SIZE,
         CELL_TANKS_SIZE,
-        R.drawable.tank
+        R.drawable.tank,
+        true
     ),
 }
