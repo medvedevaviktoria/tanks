@@ -10,6 +10,7 @@ import com.example.pr12_battletanks_ustinova_d_v_.CELL_SIZE
 import com.example.pr12_battletanks_ustinova_d_v_.R
 import com.example.pr12_battletanks_ustinova_d_v_.Utils.checkViewCanMoveThroughBorder
 import com.example.pr12_battletanks_ustinova_d_v_.Utils.getElementByCoordinates
+import com.example.pr12_battletanks_ustinova_d_v_.Utils.runOnUiThread
 import com.example.pr12_battletanks_ustinova_d_v_.enums.Direction
 import com.example.pr12_battletanks_ustinova_d_v_.models.Coordinate
 import com.example.pr12_battletanks_ustinova_d_v_.models.Element
@@ -18,7 +19,7 @@ private const val BULLET_HEIGHT = 15
 private const val BULLET_WIDTH = 15
 
 
-class BulletDrawer(val container: FrameLayout) {
+class BulletDrawer(private val container: FrameLayout) {
 
     private var canBulletGoFurther = true
     private var bulletThread: Thread? = null
@@ -52,12 +53,12 @@ class BulletDrawer(val container: FrameLayout) {
                             (bullet.layoutParams as FrameLayout.LayoutParams).leftMargin
                         )
                     )
-                    (container.context as Activity).runOnUiThread {
+                    container.runOnUiThread {
                         container.removeView(bullet)
                         container.addView(bullet)
                     }
                 }
-                (container.context as Activity).runOnUiThread {
+                container.runOnUiThread {
                     container.removeView(bullet)
                 }
             }
@@ -115,12 +116,10 @@ class BulletDrawer(val container: FrameLayout) {
         canBulletGoFurther = false
     }
 
-    private fun removeView(element: Element?) {
+    private fun removeView(element: Element) {
         val activity = container.context as Activity
         activity.runOnUiThread {
-            if (element != null) {
-                container.removeView(activity.findViewById(element.viewId))
-            }
+            container.removeView(activity.findViewById(element.viewId))
         }
     }
 
