@@ -12,10 +12,7 @@ import com.example.pr12_battletanks_ustinova_d_v_.enums.Direction.DOWN
 import com.example.pr12_battletanks_ustinova_d_v_.enums.Direction.LEFT
 import com.example.pr12_battletanks_ustinova_d_v_.enums.Direction.RIGHT
 import com.example.pr12_battletanks_ustinova_d_v_.databinding.ActivityMainBinding
-import com.example.pr12_battletanks_ustinova_d_v_.drawers.BulletDrawer
-import com.example.pr12_battletanks_ustinova_d_v_.drawers.ElementsDrawer
-import com.example.pr12_battletanks_ustinova_d_v_.drawers.GridDrawer
-import com.example.pr12_battletanks_ustinova_d_v_.drawers.TankDrawer
+import com.example.pr12_battletanks_ustinova_d_v_.drawers.*
 import com.example.pr12_battletanks_ustinova_d_v_.enums.Material
 
 const val CELL_SIZE = 50
@@ -45,6 +42,10 @@ class MainActivity : AppCompatActivity() {
         LevelStorage(this)
     }
 
+    private val enemyDrawer by lazy {
+        EnemyDrawer(binding.container)
+    }
+
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -61,12 +62,6 @@ class MainActivity : AppCompatActivity() {
         }
         binding.editorGrass.setOnClickListener {elementsDrawer.currentMaterial = Material.GRASS}
         binding.editorEagle.setOnClickListener {elementsDrawer.currentMaterial = Material.EAGLE}
-        binding.editorEnemyRespawn.setOnClickListener {
-            elementsDrawer.currentMaterial = Material.ENEMY_TANK_RESPAWN
-        }
-        binding.editorPlayerRespawn.setOnClickListener {
-            elementsDrawer.currentMaterial = Material.PLAYER_TANK_RESPAWN
-        }
         binding.container.setOnTouchListener { _, event ->
             elementsDrawer.onTouchContainer(event.x, event.y)
             return@setOnTouchListener true
@@ -90,13 +85,11 @@ class MainActivity : AppCompatActivity() {
     private fun showSettings() {
         gridDrawer.drawGrid()
         binding.materialsContainer.visibility = VISIBLE
-        elementsDrawer.changeElementsVisibility(true)
     }
 
     private fun hideSettings() {
         gridDrawer.removeGrid()
         binding.materialsContainer.visibility = GONE
-        elementsDrawer.changeElementsVisibility(false)
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
