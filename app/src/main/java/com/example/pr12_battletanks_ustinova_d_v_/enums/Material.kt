@@ -17,9 +17,49 @@ enum class Material(
     val height: Int,
     val image: Int
 ) {
-    EMPTY(true, true, true, false, 0, 0, 0),
-    BRICK(false, false, true, false, 1, 1, R.drawable.brick),
-    CONCRETE(false, false, false, false, 1, 1, R.drawable.concrete),
-    GRASS(true, true, false, false, 1, 1, R.drawable.grass),
-    EAGLE(false, false, true, true, 4, 3, R.drawable.eagle),
+    EMPTY(
+        true,
+        true,
+        true,
+        false,
+        0,
+        0,
+        0
+        ),
+    BRICK(
+        false,
+        false,
+        true,
+        false,
+        CELL_SIMPLE_ELEMENT,
+        CELL_SIMPLE_ELEMENT,
+        R.drawable.brick
+        ),
+    CONCRETE(
+        false,
+        false,
+        false,
+        false,
+        CELL_SIMPLE_ELEMENT,
+        CELL_SIMPLE_ELEMENT,
+        R.drawable.concrete
+        ),
+    GRASS(
+        true,
+        true,
+        false,
+        false,
+        CELL_SIMPLE_ELEMENT,
+        CELL_SIMPLE_ELEMENT,
+        R.drawable.grass
+        ),
+    EAGLE(
+        false,
+        false,
+        true,
+        true,
+        CELL_EAGLE_WIDTH,
+        CELL_EAGLE_HEIGHT,
+        R.drawable.eagle
+        ),
 }
