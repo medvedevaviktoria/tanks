@@ -8,6 +8,7 @@ import com.example.pr12_battletanks_ustinova_d_v_.CELL_SIZE
 import com.example.pr12_battletanks_ustinova_d_v_.binding
 import com.example.pr12_battletanks_ustinova_d_v_.models.Coordinate
 import com.example.pr12_battletanks_ustinova_d_v_.models.Element
+import com.example.pr12_battletanks_ustinova_d_v_.models.Tank
 
 fun View.checkViewCanMoveThroughBorder(coordinate: Coordinate) : Boolean {
     return  coordinate.top >= 0 &&
@@ -36,6 +37,11 @@ fun getElementByCoordinates(
     }
     return null
 }
+
+fun getTankByCoordinates(coordinate: Coordinate, tankList: List<Tank>): Element? {
+    return getElementByCoordinates(coordinate, tankList.map {it.element})
+}
+
 
 fun Element.drawElement(container: FrameLayout) {
     val view = ImageView(container.context)
