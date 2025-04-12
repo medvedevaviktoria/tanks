@@ -7,13 +7,15 @@ import com.example.pr12_battletanks_ustinova_d_v_.Utils.checkViewCanMoveThroughB
 import com.example.pr12_battletanks_ustinova_d_v_.Utils.getElementByCoordinates
 import com.example.pr12_battletanks_ustinova_d_v_.Utils.runOnUiThread
 import com.example.pr12_battletanks_ustinova_d_v_.binding
+import com.example.pr12_battletanks_ustinova_d_v_.drawers.BulletDrawer
 import com.example.pr12_battletanks_ustinova_d_v_.enums.Direction
 import com.example.pr12_battletanks_ustinova_d_v_.enums.Material
 import kotlin.random.Random
 
-class Tank(
+class Tank constructor(
      val element: Element,
-     var direction: Direction
+     var direction: Direction,
+     val bulletDrawer: BulletDrawer
 ) {
     fun move(
         direction: Direction,

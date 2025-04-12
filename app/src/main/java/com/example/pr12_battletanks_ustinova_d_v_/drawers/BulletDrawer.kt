@@ -12,8 +12,10 @@ import com.example.pr12_battletanks_ustinova_d_v_.Utils.checkViewCanMoveThroughB
 import com.example.pr12_battletanks_ustinova_d_v_.Utils.getElementByCoordinates
 import com.example.pr12_battletanks_ustinova_d_v_.Utils.runOnUiThread
 import com.example.pr12_battletanks_ustinova_d_v_.enums.Direction
+import com.example.pr12_battletanks_ustinova_d_v_.enums.Material
 import com.example.pr12_battletanks_ustinova_d_v_.models.Coordinate
 import com.example.pr12_battletanks_ustinova_d_v_.models.Element
+import com.example.pr12_battletanks_ustinova_d_v_.models.Tank
 
 private const val BULLET_HEIGHT = 15
 private const val BULLET_WIDTH = 15
@@ -23,17 +25,21 @@ class BulletDrawer(private val container: FrameLayout) {
 
     private var canBulletGoFurther = true
     private var bulletThread: Thread? = null
+    private lateinit var tank: Tank
 
     private fun checkBulletThreadDlive() = bulletThread !=null && bulletThread!!.isAlive
 
-    fun makeBulletMove(myTank: View,
-                       currentDirection: Direction,
-                       elementsOnContainer: MutableList<Element>
+    fun makeBulletMove(
+        tank: Tank,
+        elementsOnContainer: MutableList<Element>
     ) {
         canBulletGoFurther = true
+        this.tank = tank
+        val currentDirection = tank.direction
         if (!checkBulletThreadDlive()) {
-            bulletThread = Thread {
-                val bullet = createBullet(myTank, currentDirection)
+            bulletThread = Thread(Runnable {
+                val view = container.findViewById<View>(this.tank.element.viewId) ?: return@Runnable
+                val bullet = createBullet(view, currentDirection)
                 while (bullet.checkViewCanMoveThroughBorder(
                         Coordinate(bullet.top, bullet.left)
                     ) && canBulletGoFurther
@@ -61,7 +67,7 @@ class BulletDrawer(private val container: FrameLayout) {
                 container.runOnUiThread {
                     container.removeView(bullet)
                 }
-            }
+            })
             bulletThread!!.start()
         }
     }
@@ -87,10 +93,15 @@ class BulletDrawer(private val container: FrameLayout) {
         elementsOnContainer: MutableList<Element>,
         detectedCoordinateList: List<Coordinate>
     ) {
-        detectedCoordinateList.forEach {
-            val element = getElementByCoordinates(it, elementsOnContainer)
+        for (coordinate in detectedCoordinateList) {
+            val element = getElementByCoordinates(coordinate, elementsOnContainer)
+            if (element == tank.element) {
+                continue
+            }
             removeElementsAndStopBullet(element, elementsOnContainer)
+
         }
+
     }
 
     private fun removeElementsAndStopBullet(
@@ -101,12 +112,15 @@ class BulletDrawer(private val container: FrameLayout) {
             if (element.material.bulletCanGoThrough) {
                 return
             }
+            if (tank.element.material == Material.ENEMY_TANK && element.material == Material.ENEMY_TANK) {
+                stopBullet()
+                return
+            }
             if (element.material.simpleBulletCanDestroy) {
                 stopBullet()
                 removeView(element)
                 elementsOnContainer.remove(element)
-            }
-            else {
+            } else {
                 stopBullet()
             }
         }
