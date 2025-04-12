@@ -22,13 +22,14 @@ class Tank(
         this.direction = direction
         view.rotation = direction.rotation
         val nextCoordinate = getTankNextCoordinate(view)
-        if (view.checkViewCanMoveThroughBorder(
-                nextCoordinate
-            ) && element.checkTankCanMoveThroughMaterial(elementsOnContainer)
+        if (view.checkViewCanMoveThroughBorder(nextCoordinate)
+            && element.checkTankCanMoveThroughMaterial(nextCoordinate, elementsOnContainer)
         ) {
             binding.container.removeView(view)
             binding.container.addView(view, 0)
+            element.coordinate = nextCoordinate
         } else {
+            element.coordinate = currentCoordinate
             (view.layoutParams as FrameLayout.LayoutParams).topMargin = currentCoordinate.top
             (view.layoutParams as FrameLayout.LayoutParams).leftMargin = currentCoordinate.left
 
@@ -65,9 +66,10 @@ class Tank(
     }
 
     private fun Element.checkTankCanMoveThroughMaterial(
+        coordinate: Coordinate,
         elementsOnContainer: List<Element>
     ) : Boolean {
-        for (anyCoordinate in getTankCoordinates(element.coordinate)) {
+        for (anyCoordinate in getTankCoordinates(coordinate)) {
             val element = getElementByCoordinates(anyCoordinate, elementsOnContainer)
             if (element !=null && !element.material.tankCanGoThrough) {
                 if (this==element) {
