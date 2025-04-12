@@ -17,6 +17,7 @@ import com.example.pr12_battletanks_ustinova_d_v_.enums.Direction
 import com.example.pr12_battletanks_ustinova_d_v_.enums.Material
 import com.example.pr12_battletanks_ustinova_d_v_.models.Coordinate
 import com.example.pr12_battletanks_ustinova_d_v_.models.Element
+import com.example.pr12_battletanks_ustinova_d_v_.models.Tank
 
 const val CELL_SIZE = 50
 
@@ -32,7 +33,7 @@ class MainActivity : AppCompatActivity() {
             Coordinate(0,0),
             Material.PLAYER_TANK.width,
             Material.PLAYER_TANK.height,
-        )
+        ), UP
     )
     private val gridDrawer by lazy {
         GridDrawer(binding.container)
@@ -51,7 +52,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private val enemyDrawer by lazy {
-        EnemyDrawer(binding.container)
+        EnemyDrawer(binding.container, elementsDrawer.elementsOnContainer)
     }
 
 
@@ -130,19 +131,17 @@ class MainActivity : AppCompatActivity() {
         if (editMode) {
             return
         }
-        enemyDrawer.startEnemyDrawing(elementsDrawer.elementsOnContainer)
+        enemyDrawer.startEnemyCreation()
+        enemyDrawer.moveEnemyTanks()
     }
 
     override fun onKeyDown(keyCode: Int, event: KeyEvent?):Boolean {
         when(keyCode)
         {
             KEYCODE_DPAD_UP -> move(UP)
-
             KEYCODE_DPAD_DOWN -> move(DOWN)
-
             KEYCODE_DPAD_LEFT -> move(LEFT)
             KEYCODE_DPAD_RIGHT -> move(RIGHT)
-
             KEYCODE_SPACE -> bulletDrawer.makeBulletMove(
                 binding.myTank,
                 playerTank.direction,
