@@ -3,7 +3,7 @@ package com.example.pr12_battletanks_ustinova_d_v_.drawers
 import android.icu.lang.UProperty
 import android.widget.FrameLayout
 import com.example.pr12_battletanks_ustinova_d_v_.CELL_SIZE
-import com.example.pr12_battletanks_ustinova_d_v_.GameCore.isPlaying
+import com.example.pr12_battletanks_ustinova_d_v_.GameCore
 import com.example.pr12_battletanks_ustinova_d_v_.SoundManager
 import com.example.pr12_battletanks_ustinova_d_v_.Utils.checkIfChanceBiggerThanRandom
 import com.example.pr12_battletanks_ustinova_d_v_.Utils.drawElement
@@ -20,7 +20,9 @@ private const val  MAX_ENEMY_AMOUNT = 20
 
 class EnemyDrawer(
     private val container: FrameLayout,
-    private val elements: MutableList<Element>
+    private val elements: MutableList<Element>,
+    private val soundManager: SoundManager,
+    private val gameCore: GameCore
     ) {
     private val respawnList: List<Coordinate>
     private var enemyAmount = 0
@@ -76,7 +78,7 @@ class EnemyDrawer(
     private fun moveEnemyTanks() {
         Thread(Runnable {
             while (true) {
-                if (!isPlaying()) {
+                if (!gameCore.isPlaying()) {
                     continue
                 }
                 goThroughAllTanks()
@@ -88,9 +90,9 @@ class EnemyDrawer(
 
     private fun goThroughAllTanks() {
         if (tanks.isNotEmpty()) {
-            SoundManager.tankMove()
+            soundManager.tankMove()
         } else {
-            SoundManager.tankStop()
+            soundManager.tankStop()
         }
         tanks.toList().forEach {
             it.move(it.direction,container,elements)
@@ -108,7 +110,7 @@ class EnemyDrawer(
         }
         Thread(Runnable {
             while (enemyAmount < MAX_ENEMY_AMOUNT) {
-                if (!isPlaying()) {
+                if (!gameCore.isPlaying()) {
                     continue
                 }
                 drawEnemy()
