@@ -1,7 +1,7 @@
 package com.example.pr12_battletanks_ustinova_d_v_.drawers
 
 import android.widget.FrameLayout
-import com.example.pr12_battletanks_ustinova_d_v_.CELL_SIZE
+import com.example.pr12_battletanks_ustinova_d_v_.activities.CELL_SIZE
 import com.example.pr12_battletanks_ustinova_d_v_.GameCore
 import com.example.pr12_battletanks_ustinova_d_v_.sounds.MainSoundPlayer
 import com.example.pr12_battletanks_ustinova_d_v_.Utils.checkIfChanceBiggerThanRandom
@@ -120,8 +120,17 @@ class EnemyDrawer(
     }
 
 
+    fun isAllTanksDestroyed(): Boolean {
+        return enemyAmount == MAX_ENEMY_AMOUNT && tanks.toList().isEmpty()
+    }
+
+    fun getPlayerScore() = enemyAmount * 100
+
 
     fun removeTank(tankIndex: Int) {
         tanks.removeAt(tankIndex)
+        if (isAllTanksDestroyed()) {
+            gameCore.playerWon(getPlayerScore())
+        }
     }
 }

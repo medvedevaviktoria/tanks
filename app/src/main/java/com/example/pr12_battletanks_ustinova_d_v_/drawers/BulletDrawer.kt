@@ -4,7 +4,7 @@ import android.app.Activity
 import android.view.View
 import android.widget.FrameLayout
 import android.widget.ImageView
-import com.example.pr12_battletanks_ustinova_d_v_.CELL_SIZE
+import com.example.pr12_battletanks_ustinova_d_v_.activities.CELL_SIZE
 import com.example.pr12_battletanks_ustinova_d_v_.GameCore
 import com.example.pr12_battletanks_ustinova_d_v_.R
 import com.example.pr12_battletanks_ustinova_d_v_.sounds.MainSoundPlayer

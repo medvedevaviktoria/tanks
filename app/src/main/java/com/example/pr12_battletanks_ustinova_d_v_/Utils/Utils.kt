@@ -1,12 +1,11 @@
 package com.example.pr12_battletanks_ustinova_d_v_.Utils
 
 import android.app.Activity
-import android.health.connect.datatypes.units.Percentage
 import android.view.View
 import android.widget.FrameLayout
 import android.widget.ImageView
-import com.example.pr12_battletanks_ustinova_d_v_.CELL_SIZE
-import com.example.pr12_battletanks_ustinova_d_v_.binding
+import com.example.pr12_battletanks_ustinova_d_v_.activities.CELL_SIZE
+import com.example.pr12_battletanks_ustinova_d_v_.activities.binding
 import com.example.pr12_battletanks_ustinova_d_v_.models.Coordinate
 import com.example.pr12_battletanks_ustinova_d_v_.models.Element
 import com.example.pr12_battletanks_ustinova_d_v_.models.Tank
