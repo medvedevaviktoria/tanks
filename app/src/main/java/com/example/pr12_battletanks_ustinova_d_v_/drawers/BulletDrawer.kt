@@ -7,6 +7,7 @@ import android.widget.ActionMenuView
 import android.widget.FrameLayout
 import android.widget.ImageView
 import com.example.pr12_battletanks_ustinova_d_v_.CELL_SIZE
+import com.example.pr12_battletanks_ustinova_d_v_.GameCore.isPlaying
 import com.example.pr12_battletanks_ustinova_d_v_.R
 import com.example.pr12_battletanks_ustinova_d_v_.Utils.checkViewCanMoveThroughBorder
 import com.example.pr12_battletanks_ustinova_d_v_.Utils.getElementByCoordinates
@@ -48,6 +49,9 @@ class BulletDrawer(
     private fun moveAllBullets() {
         Thread(Runnable {
             while (true) {
+                if (!isPlaying()) {
+                    continue
+                }
                 interactWithAllBullets()
                 Thread.sleep(30)
             }

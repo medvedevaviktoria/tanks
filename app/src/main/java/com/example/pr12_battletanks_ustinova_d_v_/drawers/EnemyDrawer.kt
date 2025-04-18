@@ -3,6 +3,7 @@ package com.example.pr12_battletanks_ustinova_d_v_.drawers
 import android.icu.lang.UProperty
 import android.widget.FrameLayout
 import com.example.pr12_battletanks_ustinova_d_v_.CELL_SIZE
+import com.example.pr12_battletanks_ustinova_d_v_.GameCore.isPlaying
 import com.example.pr12_battletanks_ustinova_d_v_.Utils.checkIfChanceBiggerThanRandom
 import com.example.pr12_battletanks_ustinova_d_v_.Utils.drawElement
 import com.example.pr12_battletanks_ustinova_d_v_.binding
@@ -25,6 +26,7 @@ class EnemyDrawer(
     private var currentCoordinate: Coordinate
     val tanks = mutableListOf<Tank>()
     lateinit var bulletDrawer: BulletDrawer
+    private var gameStated = false
 
     init {
         respawnList = getRespawnList()
@@ -70,9 +72,12 @@ class EnemyDrawer(
     }
 
 
-    fun moveEnemyTanks() {
+    private fun moveEnemyTanks() {
         Thread(Runnable {
             while (true) {
+                if (!isPlaying()) {
+                    continue
+                }
                 goThroughAllTanks()
                 Thread.sleep(400)
             }
@@ -92,13 +97,20 @@ class EnemyDrawer(
 
 
     fun startEnemyCreation() {
+        if (gameStated) {
+            return
+        }
         Thread(Runnable {
             while (enemyAmount < MAX_ENEMY_AMOUNT) {
+                if (!isPlaying()) {
+                    continue
+                }
                 drawEnemy()
                 enemyAmount++
                 Thread.sleep(3000)
             }
         }).start()
+        moveEnemyTanks()
     }
 
 
