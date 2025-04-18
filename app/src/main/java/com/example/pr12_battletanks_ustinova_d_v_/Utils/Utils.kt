@@ -1,6 +1,7 @@
 package com.example.pr12_battletanks_ustinova_d_v_.Utils
 
 import android.app.Activity
+import android.health.connect.datatypes.units.Percentage
 import android.view.View
 import android.widget.FrameLayout
 import android.widget.ImageView
@@ -9,6 +10,9 @@ import com.example.pr12_battletanks_ustinova_d_v_.binding
 import com.example.pr12_battletanks_ustinova_d_v_.models.Coordinate
 import com.example.pr12_battletanks_ustinova_d_v_.models.Element
 import com.example.pr12_battletanks_ustinova_d_v_.models.Tank
+import kotlin.random.Random
+
+const val TOTAL_PERCENT = 100
 
 fun View.checkViewCanMoveThroughBorder(coordinate: Coordinate) : Boolean {
     return  coordinate.top >= 0 &&
@@ -64,4 +68,8 @@ fun FrameLayout.runOnUiThread(block: () -> Unit) {
     (this.context as Activity).runOnUiThread {
         block()
     }
+}
+
+fun checkIfChanceBiggerThanRandom(percentChance: Int): Boolean {
+    return Random.nextInt(TOTAL_PERCENT) <= percentChance
 }

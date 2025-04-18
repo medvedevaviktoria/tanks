@@ -109,7 +109,9 @@ class BulletDrawer(
             if (element.material.bulletCanGoThrough) {
                 return
             }
-            if (tank.element.material == Material.ENEMY_TANK && element.material == Material.ENEMY_TANK) {
+            if (tank.element.material == Material.ENEMY_TANK
+                && element.material == Material.ENEMY_TANK
+                ) {
                 stopBullet()
                 return
             }
@@ -117,10 +119,18 @@ class BulletDrawer(
                 stopBullet()
                 removeView(element)
                 elements.remove(element)
+                removeTank(element)
             } else {
                 stopBullet()
             }
         }
+    }
+
+
+    private fun removeTank(element: Element) {
+        val tanksElements = enemyDrawer.tanks.map {it.element}
+        val tankIndex = tanksElements.indexOf(element)
+        enemyDrawer.removeTank(tankIndex)
     }
 
     private fun stopBullet() {
