@@ -4,6 +4,7 @@ import android.icu.lang.UProperty
 import android.widget.FrameLayout
 import com.example.pr12_battletanks_ustinova_d_v_.CELL_SIZE
 import com.example.pr12_battletanks_ustinova_d_v_.GameCore.isPlaying
+import com.example.pr12_battletanks_ustinova_d_v_.SoundManager
 import com.example.pr12_battletanks_ustinova_d_v_.Utils.checkIfChanceBiggerThanRandom
 import com.example.pr12_battletanks_ustinova_d_v_.Utils.drawElement
 import com.example.pr12_battletanks_ustinova_d_v_.binding
@@ -86,13 +87,18 @@ class EnemyDrawer(
 
 
     private fun goThroughAllTanks() {
-            tanks.toList().forEach {
-                it.move(it.direction,container,elements)
-                if (checkIfChanceBiggerThanRandom(10))
-                {
-                    bulletDrawer.addNewBulletForTank(it)
-                }
+        if (tanks.isNotEmpty()) {
+            SoundManager.tankMove()
+        } else {
+            SoundManager.tankStop()
+        }
+        tanks.toList().forEach {
+            it.move(it.direction,container,elements)
+            if (checkIfChanceBiggerThanRandom(10))
+            {
+                bulletDrawer.addNewBulletForTank(it)
             }
+        }
     }
 
 
@@ -116,7 +122,6 @@ class EnemyDrawer(
 
 
     fun removeTank(tankIndex: Int) {
-        if (tankIndex < 0) return
         tanks.removeAt(tankIndex)
     }
 }
