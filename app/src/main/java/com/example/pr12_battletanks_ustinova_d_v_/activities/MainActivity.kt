@@ -14,6 +14,7 @@ import androidx.core.content.ContextCompat
 import com.example.pr12_battletanks_ustinova_d_v_.GameCore
 import com.example.pr12_battletanks_ustinova_d_v_.LevelStorage
 import com.example.pr12_battletanks_ustinova_d_v_.R
+import com.example.pr12_battletanks_ustinova_d_v_.Utils.ProgressIndicator
 
 import com.example.pr12_battletanks_ustinova_d_v_.enums.Direction.UP
 import com.example.pr12_battletanks_ustinova_d_v_.enums.Direction.DOWN
@@ -32,7 +33,7 @@ const val CELL_SIZE = 50
 
 lateinit var binding: ActivityMainBinding
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(), ProgressIndicator {
     private var editMode = false
     private lateinit var item: MenuItem
 
@@ -54,7 +55,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private val soundManager by lazy {
-        MainSoundPlayer(this)
+        MainSoundPlayer(this, this)
     }
 
     private fun createTank(elementWidth: Int, elementHeight: Int) : Tank {
@@ -268,4 +269,17 @@ class MainActivity : AppCompatActivity() {
         super.onActivityResult(requestCode, resultCode, data)
     }
 
+
+    override fun showProgress() {
+        binding.container.visibility = INVISIBLE
+        binding.totalContainer.setBackgroundResource(R.color.gray)
+        binding.initTitle.visibility = VISIBLE
+    }
+
+    override fun dismissProgress() {
+        Thread.sleep(3000L)
+        binding.container.visibility = VISIBLE
+        binding.totalContainer.setBackgroundResource(R.color.black)
+        binding.initTitle.visibility = GONE
+    }
 }
