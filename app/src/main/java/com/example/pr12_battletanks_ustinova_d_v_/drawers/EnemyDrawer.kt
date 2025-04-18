@@ -1,13 +1,11 @@
 package com.example.pr12_battletanks_ustinova_d_v_.drawers
 
-import android.icu.lang.UProperty
 import android.widget.FrameLayout
 import com.example.pr12_battletanks_ustinova_d_v_.CELL_SIZE
 import com.example.pr12_battletanks_ustinova_d_v_.GameCore
-import com.example.pr12_battletanks_ustinova_d_v_.SoundManager
+import com.example.pr12_battletanks_ustinova_d_v_.sounds.MainSoundPlayer
 import com.example.pr12_battletanks_ustinova_d_v_.Utils.checkIfChanceBiggerThanRandom
 import com.example.pr12_battletanks_ustinova_d_v_.Utils.drawElement
-import com.example.pr12_battletanks_ustinova_d_v_.binding
 import com.example.pr12_battletanks_ustinova_d_v_.enums.CELL_TANKS_SIZE
 import com.example.pr12_battletanks_ustinova_d_v_.enums.Direction
 import com.example.pr12_battletanks_ustinova_d_v_.enums.Material
@@ -21,7 +19,7 @@ private const val  MAX_ENEMY_AMOUNT = 20
 class EnemyDrawer(
     private val container: FrameLayout,
     private val elements: MutableList<Element>,
-    private val soundManager: SoundManager,
+    private val soundManager: MainSoundPlayer,
     private val gameCore: GameCore
     ) {
     private val respawnList: List<Coordinate>
