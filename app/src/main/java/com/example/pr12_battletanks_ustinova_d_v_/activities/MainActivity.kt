@@ -1,5 +1,7 @@
-package com.example.pr12_battletanks_ustinova_d_v_
+package com.example.pr12_battletanks_ustinova_d_v_.activities
 
+import android.app.Activity
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.KeyEvent
@@ -9,6 +11,9 @@ import android.view.MenuItem
 import android.view.View.*
 import android.view.ViewTreeObserver.OnGlobalLayoutListener
 import androidx.core.content.ContextCompat
+import com.example.pr12_battletanks_ustinova_d_v_.GameCore
+import com.example.pr12_battletanks_ustinova_d_v_.LevelStorage
+import com.example.pr12_battletanks_ustinova_d_v_.R
 import com.example.pr12_battletanks_ustinova_d_v_.enums.Direction.UP
 import com.example.pr12_battletanks_ustinova_d_v_.enums.Direction.DOWN
 import com.example.pr12_battletanks_ustinova_d_v_.enums.Direction.LEFT
@@ -252,9 +257,16 @@ class MainActivity : AppCompatActivity() {
         playerTank.move(direction, binding.container, elementsDrawer.elementsOnContainer)
     }
 
-    fun onButtonReleased() {
+    private fun onButtonReleased() {
         if (enemyDrawer.tanks.isEmpty()) {
             soundManager.tankStop()
         }
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        if (resultCode == Activity.RESULT_OK && requestCode == SCORE_REQUEST_CODE) {
+            recreate()
+        }
+        super.onActivityResult(requestCode, resultCode, data)
     }
 }

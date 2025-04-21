@@ -2,15 +2,14 @@ package com.example.pr12_battletanks_ustinova_d_v_.models
 
 import android.view.View
 import android.widget.FrameLayout
-import com.example.pr12_battletanks_ustinova_d_v_.CELL_SIZE
+import com.example.pr12_battletanks_ustinova_d_v_.activities.CELL_SIZE
 import com.example.pr12_battletanks_ustinova_d_v_.Utils.checkIfChanceBiggerThanRandom
 import com.example.pr12_battletanks_ustinova_d_v_.Utils.checkViewCanMoveThroughBorder
 import com.example.pr12_battletanks_ustinova_d_v_.Utils.getElementByCoordinates
 import com.example.pr12_battletanks_ustinova_d_v_.Utils.getTankByCoordinates
 import com.example.pr12_battletanks_ustinova_d_v_.Utils.getViewCoordinate
 import com.example.pr12_battletanks_ustinova_d_v_.Utils.runOnUiThread
-import com.example.pr12_battletanks_ustinova_d_v_.binding
-import com.example.pr12_battletanks_ustinova_d_v_.drawers.BulletDrawer
+import com.example.pr12_battletanks_ustinova_d_v_.activities.binding
 import com.example.pr12_battletanks_ustinova_d_v_.drawers.EnemyDrawer
 import com.example.pr12_battletanks_ustinova_d_v_.enums.Direction
 import com.example.pr12_battletanks_ustinova_d_v_.enums.Material

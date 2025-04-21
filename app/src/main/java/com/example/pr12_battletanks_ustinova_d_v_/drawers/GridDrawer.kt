@@ -1,11 +1,9 @@
 package com.example.pr12_battletanks_ustinova_d_v_.drawers
 
-import android.content.Context
 import android.graphics.Color
 import android.view.View
 import android.widget.FrameLayout
-import com.example.pr12_battletanks_ustinova_d_v_.CELL_SIZE
-import com.example.pr12_battletanks_ustinova_d_v_.binding
+import com.example.pr12_battletanks_ustinova_d_v_.activities.CELL_SIZE
 
 
 class GridDrawer(private val container: FrameLayout) {

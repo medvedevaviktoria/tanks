@@ -2,7 +2,7 @@ package com.example.pr12_battletanks_ustinova_d_v_.drawers
 
 import android.view.View
 import android.widget.FrameLayout
-import com.example.pr12_battletanks_ustinova_d_v_.CELL_SIZE
+import com.example.pr12_battletanks_ustinova_d_v_.activities.CELL_SIZE
 import com.example.pr12_battletanks_ustinova_d_v_.Utils.drawElement
 import com.example.pr12_battletanks_ustinova_d_v_.Utils.getElementByCoordinates
 import com.example.pr12_battletanks_ustinova_d_v_.enums.Material
