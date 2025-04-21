@@ -29,7 +29,7 @@
             android:layout_weight="1"
             android:textColor="@color/white"
             android:textSize="90sp"
-            android:text="20" />
+            android:text="" />
 
         <ImageView
             android:layout_width="0dp"
