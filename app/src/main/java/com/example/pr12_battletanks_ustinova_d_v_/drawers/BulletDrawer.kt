@@ -1,15 +1,13 @@
 package com.example.pr12_battletanks_ustinova_d_v_.drawers
 
 import android.app.Activity
-import android.view.GestureDetector
 import android.view.View
-import android.widget.ActionMenuView
 import android.widget.FrameLayout
 import android.widget.ImageView
 import com.example.pr12_battletanks_ustinova_d_v_.CELL_SIZE
 import com.example.pr12_battletanks_ustinova_d_v_.GameCore
 import com.example.pr12_battletanks_ustinova_d_v_.R
-import com.example.pr12_battletanks_ustinova_d_v_.SoundManager
+import com.example.pr12_battletanks_ustinova_d_v_.sounds.MainSoundPlayer
 import com.example.pr12_battletanks_ustinova_d_v_.Utils.checkViewCanMoveThroughBorder
 import com.example.pr12_battletanks_ustinova_d_v_.Utils.getElementByCoordinates
 import com.example.pr12_battletanks_ustinova_d_v_.Utils.getTankByCoordinates
@@ -30,7 +28,7 @@ class BulletDrawer(
     private val container: FrameLayout,
     private val elements:MutableList<Element>,
     private val enemyDrawer: EnemyDrawer,
-    private val soundManager: SoundManager,
+    private val soundManager: MainSoundPlayer,
     private val gameCore: GameCore
     ) {
 
