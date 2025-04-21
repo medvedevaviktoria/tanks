@@ -19,6 +19,7 @@ class GameCore(private val activity: Activity) {
         isPlay = false
     }
 
+
     fun destroyPlayerOrBase() {
         isPlayerOrBaseDestroyed = true
         pauseTheGame()
